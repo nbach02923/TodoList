@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
+import NewTask from "./proj/newTask";
+import TodoList from "./proj/todoList";
+import TaskListProvider from "./proj/taskListProvider";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	if (!global.taskList) {
+		global.taskList = [];
+	}
+	return (
+		<TaskListProvider>
+			<ScrollView>
+				<View style={styles.container}>
+					<NewTask />
+					<TodoList />
+				</View>
+			</ScrollView>
+		</TaskListProvider>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		flexDirection: "row",
+		justifyContent: "space-around",
+	},
 });
